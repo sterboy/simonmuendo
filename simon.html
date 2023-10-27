@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Local Storage Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background: #f0f0f0;
+        }
+
+        header {
+            background-color: #333;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        table {
+            margin: auto;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #passport-image {
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>My Profile</h1>
+    </header>
+    <div id="passport-image">
+        <img src="1.jpg" alt="MY Picture" style="width:150px;height:150px;border-radius: 50%;">
+    </div>
+    <h1>Welcome to Local Storage Demo</h1>
+    <table style="width:50%;">
+        <tr>
+            <td>Name:</td>
+            <td>Simon Muendo</td>
+        </tr>
+        <tr>
+            <td>Registration Number:</td>
+            <td>Sct222-0140/2021</td>
+        </tr>
+    </table>
+    <p style="margin-top: 20px;">Click the buttons to set your preferred background color:</p>
+    <button type="button" onclick="setColorPreference('orange')">Orange</button>
+    <button type="button" onclick="setColorPreference('grey')">Grey</button>
+    <button type="button" onclick="setColorPreference('violet')">Violet</button>
+</body>
+
+<script>
+    const localStorage = window.localStorage;
+
+    const updateDOM = () => {
+        const storedPreferences = localStorage.getItem("preference");
+        const preference = storedPreferences ? JSON.parse(storedPreferences) : {};
+        document.body.style.background = preference.color || "white";
+    };
+
+    const setColorPreference = (color) => {
+        const preference = {
+            color
+        };
+        localStorage.setItem("preference", JSON.stringify(preference));
+        updateDOM();
+    };
+</script>
+
+</html>
